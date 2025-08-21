@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База данных электронных компонентов</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>База данных электронных компонентов</h1>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Поиск компонентов...">
+                <button id="searchBtn">Поиск</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Левая панель с деревом категорий -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h3>Категории</h3>
+                    <button id="addCategoryBtn" title="Добавить категорию">+</button>
+                </div>
+                <div id="categoryTree" class="category-tree"></div>
+            </aside>
+
+            <!-- Основная область контента -->
+            <main class="content-area">
+                <div id="componentList" class="component-list" style="display: none;">
+                    <div class="list-header">
+                        <h3 id="currentCategoryName">Компоненты</h3>
+                        <button id="addComponentBtn">Добавить компонент</button>
+                    </div>
+                    <div id="componentsContainer" class="components-container"></div>
+                </div>
+
+                <div id="componentDetail" class="component-detail" style="display: none;">
+                    <div class="detail-header">
+                        <h3>Карточка компонента</h3>
+                        <div class="detail-actions">
+                            <button id="saveComponentBtn">Сохранить</button>
+                            <button id="deleteComponentBtn" class="danger">Удалить</button>
+                            <button id="closeDetailBtn">Закрыть</button>
+                        </div>
+                    </div>
+                    <form id="componentForm" class="component-form">
+                        <input type="hidden" id="componentId">
+                        
+                        <div class="form-group">
+                            <label for="componentName">Название:</label>
+                            <input type="text" id="componentName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="componentType">Тип компонента:</label>
+                            <select id="componentType" required>
+                                <option value="">Выберите тип</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="componentCategory">Категория:</label>
+                            <select id="componentCategory" required>
+                                <option value="">Выберите категорию</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="manufacturer">Производитель:</label>
+                            <input type="text" id="manufacturer">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="partNumber">Партномер:</label>
+                            <input type="text" id="partNumber">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Описание:</label>
+                            <textarea id="description" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stockQuantity">Количество на складе:</label>
+                            <input type="number" id="stockQuantity" min="0" value="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="datasheetUrl">Ссылка на datasheet:</label>
+                            <input type="url" id="datasheetUrl">
+                        </div>
+
+                        <div id="parametersContainer" class="parameters-container">
+                            <h4>Параметры:</h4>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="welcomeScreen" class="welcome-screen">
+                    <h2>Добро пожаловать!</h2>
+                    <p>Выберите категорию слева для просмотра компонентов или создайте новую категорию.</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Модальное окно для добавления категории -->
+    <div id="categoryModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Добавить категорию</h3>
+            <form id="categoryForm">
+                <div class="form-group">
+                    <label for="categoryName">Название категории:</label>
+                    <input type="text" id="categoryName" required>
+                </div>
+                <div class="form-group">
+                    <label for="parentCategory">Родительская категория:</label>
+                    <select id="parentCategory">
+                        <option value="">Нет (корневая категория)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="categoryType">Тип компонентов:</label>
+                    <select id="categoryType" required>
+                        <option value="">Выберите тип</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Сохранить</button>
+                    <button type="button" id="cancelCategoryBtn">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
